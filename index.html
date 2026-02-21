@@ -88,20 +88,10 @@
       font-weight:600;
       letter-spacing:.2px;
     }
-    .mark{
-      width:34px; height:34px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.06));
-      border: 1px solid var(--border);
-      display:grid; place-items:center;
-      box-shadow: 0 10px 30px rgba(0,0,0,.35);
-      backdrop-filter: blur(8px);
-    }
-    .mark span{
-      font-family: Fraunces, serif;
-      font-weight:700;
-      font-size:16px;
-      opacity:.95;
+    .logo{
+      width:34px; height:34px; display:inline-block;
+      border-radius:12px; overflow:hidden; flex:0 0 34px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35); background:transparent;
     }
 
     .nav-links{
@@ -273,7 +263,7 @@
     <div class="wrap">
       <nav class="nav">
         <a class="brand" href="/">
-          <div class="mark" aria-hidden="true"><span>MG</span></div>
+          <img class="logo" src="/favicon.svg" alt="Maxim Gil" aria-hidden="true">
           <span>Maxim Gil</span>
         </a>
         <div class="nav-links">
@@ -281,6 +271,7 @@
           <a href="#work">Work</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
+          <a class="btn" href="/login" style="margin-left:8px">Log in</a>
         </div>
       </nav>
     </div>
