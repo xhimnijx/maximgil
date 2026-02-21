@@ -247,6 +247,20 @@
       .card{ padding: 24px 18px; border-radius: 18px; }
       .nav-links a{ padding: 8px 8px; }
     }
+
+    /* Desktop: responsive lateral shift so larger screens get a bigger offset */
+    @media (min-width: 900px){
+      .hero > .card { transform: translateX(-10%); }
+    }
+    @media (min-width: 1200px){
+      .hero > .card { transform: translateX(-25%); }
+    }
+    @media (min-width: 1600px){
+      .hero > .card { transform: translateX(-40%); }
+    }
+    @media (min-width: 2560px){
+      .hero > .card { transform: translateX(-70%); }
+    }
   </style>
 </head>
 
