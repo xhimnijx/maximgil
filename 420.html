@@ -28,6 +28,33 @@
       opacity:.9;
       pointer-events:none;
     }
+    /* Animated green overlay for atmosphere: slow drift + subtle pulse */
+    .bg::after{
+      content: "";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(600px 400px at 15% 25%, rgba(120,255,140,.12), transparent 40%),
+        radial-gradient(800px 500px at 70% 65%, rgba(80,220,110,.10), transparent 40%);
+      mix-blend-mode: screen;
+      pointer-events:none;
+      /* smoother motion: ease-in-out and alternate to avoid abrupt loop jumps */
+      animation: drift 20s ease-in-out infinite alternate, pulse 6s ease-in-out infinite alternate;
+      will-change: transform, opacity, filter;
+      filter: blur(18px);
+      opacity: .9;
+      transform: translateZ(0);
+    }
+
+    @keyframes drift{
+      0%{ transform: translate3d(-8%, -3%, 0) scale(1); }
+      100%{ transform: translate3d(8%, 3%, 0) scale(1.03); }
+    }
+
+    @keyframes pulse{
+      0%{ opacity: .86; filter: blur(16px) saturate(1); }
+      50%{ opacity: 1; filter: blur(20px) saturate(1.08); }
+      100%{ opacity: .86; filter: blur(16px) saturate(1); }
+    }
     .stars{
       position:fixed; inset:0; pointer-events:none; opacity:.75;
       background:
