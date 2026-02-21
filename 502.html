@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>502 — Bad Gateway | Maxim Gil</title>
+  <style>
+    :root{
+      --bg:#0b0d10; --fg:#eaf0f6; --muted:rgba(234,240,246,.72);
+      --card:rgba(255,255,255,.08); --border:rgba(255,255,255,.14);
+      --radius:20px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--fg); background:var(--bg);
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      display:grid; place-items:center; padding:24px; overflow:hidden;
+    }
+    .bg{
+      position:fixed; inset:-20%;
+      background:
+        radial-gradient(900px 650px at 20% 20%, rgba(255,120,60,.14), transparent 60%),
+        radial-gradient(900px 650px at 80% 70%, rgba(200,80,60,.10), transparent 60%),
+        radial-gradient(700px 700px at 50% 55%, rgba(255,100,80,.10), transparent 60%);
+      filter: blur(2px);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .stars{
+      position:fixed; inset:0; pointer-events:none; opacity:.75;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(255,255,255,.10) 0 1px, transparent 2px),
+        radial-gradient(circle at 65% 20%, rgba(255,255,255,.10) 0 1px, transparent 2px),
+        radial-gradient(circle at 35% 80%, rgba(255,255,255,.08) 0 1px, transparent 2px),
+        radial-gradient(circle at 85% 70%, rgba(255,255,255,.08) 0 1px, transparent 2px),
+        radial-gradient(circle at 45% 45%, rgba(255,255,255,.06) 0 1px, transparent 2px);
+      filter: blur(.2px);
+    }
+    .card{
+      width:min(860px,100%);
+      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:28px 26px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 80px rgba(0,0,0,.55);
+      position:relative;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      color:var(--muted); text-transform:uppercase; letter-spacing:.18em;
+      font-size:12px;
+    }
+    .dot{width:7px;height:7px;border-radius:999px;background:rgba(255,255,255,.55);
+      box-shadow:0 0 0 5px rgba(255,255,255,.08)}
+    h1{margin:14px 0 8px;font-size:clamp(34px,5vw,56px);line-height:1.03;letter-spacing:-.02em}
+    p{margin:0 0 16px;color:var(--muted);max-width:70ch}
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center}
+    a.btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 16px; border-radius:14px; text-decoration:none;
+      color:var(--fg); font-weight:650; font-size:14px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.08);
+      transition:.18s ease;
+    }
+    a.btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.11)}
+    a.btn.primary{background:rgba(255,255,255,.16); border-color:rgba(255,255,255,.22)}
+    code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+      color: rgba(234,240,246,.85);
+      background: rgba(0,0,0,.25);
+      padding: 3px 7px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .small{font-size:12px;color:rgba(234,240,246,.55);margin-top:14px}
+  </style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+  <div class="stars" aria-hidden="true"></div>
+
+  <main class="card" role="main" aria-label="502 Bad Gateway">
+    <div class="kicker"><span class="dot"></span> 502 — Bad Gateway</div>
+    <h1>The connection hit a snag.</h1>
+    <p>
+      My server is having trouble communicating with its upstream service. This is usually temporary. Try refreshing the page shortly.
+    </p>
+
+    <div class="row">
+      <a class="btn primary" href="/">Home</a>
+      <a class="btn" href="javascript:location.reload()">Retry</a>
+    </div>
+
+    <div class="small">Error code: 502</div>
+  </main>
+</body>
+</html>
