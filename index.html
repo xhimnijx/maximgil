@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <title>Maxim Gil — Photography</title>
+  <meta name="description" content="Photography portfolio by Maxim Gil. Landscapes, pets, and astrophotography." />
+
+  <!-- Optional: nicer fonts (system fallback if blocked) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0b0d10;
+      --fg: #eaf0f6;
+      --muted: rgba(234,240,246,.72);
+      --glass: rgba(255,255,255,.08);
+      --glass2: rgba(255,255,255,.12);
+      --border: rgba(255,255,255,.14);
+      --shadow: 0 20px 80px rgba(0,0,0,.55);
+      --radius: 20px;
+      --max: 1100px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      color:var(--fg);
+      background: var(--bg);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height:1.35;
+      overflow-x:hidden;
+    }
+
+    /* Subtle star-noise background (no images required) */
+    .stars{
+      position:fixed; inset:0;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(255,255,255,.10) 0 1px, transparent 2px),
+        radial-gradient(circle at 65% 20%, rgba(255,255,255,.10) 0 1px, transparent 2px),
+        radial-gradient(circle at 35% 80%, rgba(255,255,255,.08) 0 1px, transparent 2px),
+        radial-gradient(circle at 85% 70%, rgba(255,255,255,.08) 0 1px, transparent 2px),
+        radial-gradient(circle at 45% 45%, rgba(255,255,255,.06) 0 1px, transparent 2px),
+        radial-gradient(1000px 700px at 70% 15%, rgba(120,160,255,.12), transparent 60%),
+        radial-gradient(900px 650px at 15% 75%, rgba(255,160,120,.10), transparent 60%),
+        radial-gradient(700px 700px at 55% 60%, rgba(180,120,255,.08), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+      filter: blur(.2px);
+    }
+
+    /* Hero background image layer */
+    .hero-bg{
+      position:fixed; inset:0;
+      background:
+        linear-gradient(to bottom, rgba(11,13,16,.65), rgba(11,13,16,.92)),
+        url("assets/hero.jpg");
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.03);
+      filter: saturate(1.05) contrast(1.02);
+      pointer-events:none;
+    }
+
+    header{
+      position:relative;
+      z-index:2;
+      padding: 22px 20px;
+    }
+    .wrap{ max-width: var(--max); margin:0 auto; }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:inherit;
+      font-weight:600;
+      letter-spacing:.2px;
+    }
+    .mark{
+      width:34px; height:34px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.06));
+      border: 1px solid var(--border);
+      display:grid; place-items:center;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      backdrop-filter: blur(8px);
+    }
+    .mark span{
+      font-family: Fraunces, serif;
+      font-weight:700;
+      font-size:16px;
+      opacity:.95;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav-links a{
+      color: var(--muted);
+      text-decoration:none;
+      font-weight:500;
+      font-size:14px;
+      padding:10px 10px;
+      border-radius: 12px;
+      transition: .2s ease;
+    }
+    .nav-links a:hover{
+      color: var(--fg);
+      background: rgba(255,255,255,.06);
+    }
+
+    main{
+      position:relative;
+      z-index:2;
+      padding: 18px 20px 48px;
+    }
+
+    .hero{
+      max-width: var(--max);
+      margin: 0 auto;
+      min-height: calc(100vh - 110px);
+      display:grid;
+      align-items:center;
+    }
+
+    .card{
+      width:min(780px, 100%);
+      padding: 30px 26px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      font-size:13px;
+      color: var(--muted);
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+    .dot{
+      width:7px; height:7px;
+      border-radius:99px;
+      background: rgba(255,255,255,.55);
+      box-shadow: 0 0 0 5px rgba(255,255,255,.08);
+    }
+
+    h1{
+      margin: 14px 0 10px;
+      font-family: Fraunces, serif;
+      font-weight: 700;
+      font-size: clamp(40px, 6vw, 66px);
+      letter-spacing: -0.02em;
+      line-height: 1.02;
+    }
+    .subtitle{
+      margin: 0 0 18px;
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--muted);
+      max-width: 60ch;
+    }
+
+    .pills{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin: 14px 0 22px;
+    }
+    .pill{
+      font-size: 13px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.14);
+      color: rgba(234,240,246,.88);
+    }
+
+    .cta{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top: 18px;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      text-decoration:none;
+      color: var(--fg);
+      font-weight: 600;
+      font-size: 14px;
+      transition: .18s ease;
+      background: rgba(255,255,255,.08);
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.11); }
+    .btn.primary{
+      background: rgba(255,255,255,.16);
+      border-color: rgba(255,255,255,.22);
+    }
+
+    .meta{
+      margin-top: 18px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px 18px;
+      color: rgba(234,240,246,.70);
+      font-size: 13px;
+    }
+    .meta a{ color: rgba(234,240,246,.86); text-decoration:none; }
+    .meta a:hover{ text-decoration:underline; }
+
+    footer{
+      position:relative;
+      z-index:2;
+      padding: 18px 20px 28px;
+      color: rgba(234,240,246,.55);
+      font-size: 12px;
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 520px){
+      .card{ padding: 24px 18px; border-radius: 18px; }
+      .nav-links a{ padding: 8px 8px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Put your hero image at: /assets/hero.jpg -->
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="stars" aria-hidden="true"></div>
+
+  <header>
+    <div class="wrap">
+      <nav class="nav">
+        <a class="brand" href="/">
+          <div class="mark" aria-hidden="true"><span>MG</span></div>
+          <span>Maxim Gil</span>
+        </a>
+        <div class="nav-links">
+          <!-- Update these routes when you add pages -->
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="card">
+        <div class="kicker"><span class="dot"></span> Photography Portfolio</div>
+
+        <h1>Land. Life. Night sky.</h1>
+        <p class="subtitle">
+          Landscapes, pets, and astrophotography — shot with intent, not autopilot.
+          Based in Devon, UK.
+        </p>
+
+        <div class="pills" aria-label="Genres">
+          <span class="pill">Landscapes</span>
+          <span class="pill">Pets</span>
+          <span class="pill">Astrophotography</span>
+        </div>
+
+        <div class="cta">
+          <a class="btn primary" href="#work">View portfolio</a>
+          <a class="btn" href="mailto:me@maximgil.com">Email me</a>
+          <!-- Optional: point this at your Instagram -->
+          <a class="btn" href="#" aria-label="Instagram link">Instagram</a>
+        </div>
+
+        <div class="meta" id="contact">
+          <span>📍 Exeter / Devon</span>
+          <span>✉️ <a href="mailto:me@maximgil.com">me@maximgil.com</a></span>
+          <span>🗓️ <span id="year"></span></span>
+        </div>
+      </div>
+
+      <!-- Sections below can become separate pages later -->
+      <div style="height:32px"></div>
+
+      <div class="wrap" style="max-width: var(--max);">
+        <div id="work" class="card" style="width:100%; max-width:none; background: rgba(255,255,255,.06);">
+          <div class="kicker"><span class="dot"></span> Featured work</div>
+          <p class="subtitle" style="margin-top:12px">
+            Replace these placeholders with a grid later. For now, this keeps the landing page looking “finished”.
+          </p>
+
+          <div style="
+            display:grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+          ">
+            <!-- Placeholder tiles -->
+            <div style="grid-column: span 12; border:1px solid rgba(255,255,255,.14); border-radius:16px; background: rgba(0,0,0,.18); padding:14px;">
+              <strong style="display:block; font-size:14px;">Astro</strong>
+              <span style="color:rgba(234,240,246,.70); font-size:13px;">Milky Way • Star trails • Moon</span>
+            </div>
+
+            <div style="grid-column: span 6; border:1px solid rgba(255,255,255,.14); border-radius:16px; background: rgba(0,0,0,.18); padding:14px;">
+              <strong style="display:block; font-size:14px;">Landscapes</strong>
+              <span style="color:rgba(234,240,246,.70); font-size:13px;">Coast • Moor • Weather</span>
+            </div>
+
+            <div style="grid-column: span 6; border:1px solid rgba(255,255,255,.14); border-radius:16px; background: rgba(0,0,0,.18); padding:14px;">
+              <strong style="display:block; font-size:14px;">Pets</strong>
+              <span style="color:rgba(234,240,246,.70); font-size:13px;">Character • Motion • Play</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:14px"></div>
+
+        <div id="about" class="card" style="width:100%; max-width:none; background: rgba(255,255,255,.06);">
+          <div class="kicker"><span class="dot"></span> About</div>
+          <p class="subtitle" style="margin-top:12px; max-width: 80ch;">
+            I shoot landscapes, people’s pets, and deep-sky scenes — chasing atmosphere over “perfect exposure.”
+            This site is a living archive of work in progress.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © <span id="year2"></span> Maxim Gil. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    const y = new Date().getFullYear();
+    document.getElementById("year").textContent = y;
+    document.getElementById("year2").textContent = y;
+  </script>
+</body>
+</html>
