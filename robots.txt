@@ -1,12 +1,5 @@
-# robots.txt for maximgil.com
-# Block automated indexing of API endpoints and login pages.
-
 User-agent: *
 Disallow: /api/
 Disallow: /login
-
-# Allow everything else
 Allow: /
-
-# Optional sitemap (uncomment if you provide one)
-# Sitemap: https://maximgil.com/sitemap.xml
+Sitemap: https://maximgil.com/sitemap.xml
