@@ -1,9 +1,13 @@
 RewriteEngine On
-RewriteRule ^api/ - [L]
-RewriteRule ^media/ - [L]
-# If file or directory exists, serve it normally
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 
-# Rewrite /login → /login.html
+# Never rewrite real files or folders
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Don't touch these paths (important if you have /media or /api later)
+RewriteRule ^(api|media|assets)/ - [L]
+
+# Pretty URLs: /login -> /login.html (ONLY if that file exists)
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
 RewriteRule ^([^/]+)/?$ $1.html [L]
