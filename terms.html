@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Terms & Conditions — Maxim Gil</title>
+  <style>
+    :root{
+      --bg:#0b0d10; --fg:#eaf0f6; --muted:rgba(234,240,246,.72);
+      --card:rgba(255,255,255,.08); --border:rgba(255,255,255,.14);
+      --radius:20px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--fg); background:var(--bg);
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      display:grid; place-items:center; padding:24px; overflow:hidden;
+    }
+    .bg{
+      position:fixed; inset:-20%;
+      background:
+        radial-gradient(900px 650px at 20% 20%, rgba(120,160,255,.14), transparent 60%),
+        radial-gradient(900px 650px at 80% 70%, rgba(255,160,120,.10), transparent 60%),
+        radial-gradient(700px 700px at 50% 55%, rgba(180,120,255,.10), transparent 60%);
+      filter: blur(2px);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .stars{
+      position:fixed; inset:0; pointer-events:none; opacity:.75;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(255,255,255,.10) 0 1px, transparent 2px),
+        radial-gradient(circle at 65% 20%, rgba(255,255,255,.10) 0 1px, transparent 2px),
+        radial-gradient(circle at 35% 80%, rgba(255,255,255,.08) 0 1px, transparent 2px),
+        radial-gradient(circle at 85% 70%, rgba(255,255,255,.08) 0 1px, transparent 2px),
+        radial-gradient(circle at 45% 45%, rgba(255,255,255,.06) 0 1px, transparent 2px);
+      filter: blur(.2px);
+    }
+    .card{
+      width:min(860px,100%);
+      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:28px 26px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 80px rgba(0,0,0,.55);
+      position:relative;
+    }
+    h1{margin:0 0 8px;font-size:clamp(28px,4.5vw,36px);line-height:1.05}
+    p{margin:0 0 12px;color:var(--muted);max-width:72ch}
+    h2{margin:18px 0 8px;font-size:16px}
+    ul{margin:8px 0 12px 20px;color:var(--muted)}
+    a{color:var(--fg);text-decoration:underline}
+    .small{font-size:12px;color:rgba(234,240,246,.55);margin-top:14px}
+  </style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+  <div class="stars" aria-hidden="true"></div>
+
+  <main class="card" role="main" aria-label="Terms and Conditions">
+    <h1>Terms &amp; Conditions</h1>
+    <p class="small">Last updated: 22/02/2026</p>
+
+    <p>By accessing maximgil.com, you agree to the following terms.</p>
+
+    <h2>1. Website use</h2>
+    <p>This website is a portfolio and client gallery platform. Users may not:</p>
+    <ul>
+      <li>Attempt to gain unauthorised access</li>
+      <li>Copy, redistribute, or reproduce images without permission</li>
+      <li>Use automated tools to scrape content</li>
+    </ul>
+
+    <h2>2. Intellectual property</h2>
+    <p>All photographs displayed on this website remain the intellectual property of Maxim Gil unless otherwise agreed in writing. Client access does not grant reproduction or distribution rights unless explicitly stated in contract.</p>
+
+    <h2>3. Client accounts</h2>
+    <p>Client accounts are created manually and granted at the photographer’s discretion. Users are responsible for maintaining the confidentiality of their login credentials. Accounts may be revoked at any time if misuse is detected.</p>
+
+    <h2>4. Limitation of liability</h2>
+    <p>While we take reasonable steps to maintain availability, we do not guarantee uninterrupted access. We are not liable for temporary outages, data loss beyond reasonable control, or third-party service interruptions.</p>
+
+    <h2>5. Changes</h2>
+    <p>These terms may be updated periodically. Continued use of the website constitutes acceptance of updated terms.</p>
+
+    <div class="small">If you have questions about these terms, contact: <a href="mailto:me@maximgil.com">me@maximgil.com</a></div>
+  </main>
+</body>
+</html>
