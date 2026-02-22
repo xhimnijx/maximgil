@@ -1,10 +1,9 @@
 RewriteEngine On
-
+RewriteRule ^api/ - [L]
+RewriteRule ^media/ - [L]
 # If file or directory exists, serve it normally
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 # Rewrite /login → /login.html
 RewriteRule ^([^/]+)/?$ $1.html [L]
-RewriteRule ^api/ - [L]
-RewriteRule ^media/ - [L]
