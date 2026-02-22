@@ -6,3 +6,5 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 # Rewrite /login → /login.html
 RewriteRule ^([^/]+)/?$ $1.html [L]
+RewriteRule ^api/ - [L]
+RewriteRule ^media/ - [L]

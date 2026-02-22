@@ -157,6 +157,10 @@
       object-position: center;
     }
 
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:var(--fg);text-decoration:none;font-weight:600;cursor:pointer
+    }
+
     footer{
       position:relative;
       z-index:2;
@@ -203,12 +207,14 @@
       <p>Landscapes, pets, and astrophotography.</p>
     </section>
 
-    <section class="gallery" role="region" aria-label="Photography gallery">
-      <article class="gallery-item">
-        <img src="/assets/hero.jpg" alt="Hero landscape photograph">
-      </article>
-      <!-- More images will be added as you upload them to /assets -->
+    <section id="gallery" class="gallery" role="region" aria-label="Photography gallery">
+      <!-- Images are loaded from the API and injected here -->
     </section>
+
+    <div style="max-width:var(--max);margin:18px auto 0;text-align:center">
+      <button id="loadMore" class="btn">Load more</button>
+      <div id="loading" style="display:none;margin-top:10px;color:var(--muted)">Loading…</div>
+    </div>
   </main>
 
   <footer>
@@ -219,6 +225,72 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  <script>
+    (function(){
+      const gallery = document.getElementById('gallery');
+      const loadMoreBtn = document.getElementById('loadMore');
+      const loadingEl = document.getElementById('loading');
+      let nextCursor = null;
+      let hasMore = true;
+      const limit = 12;
+      const params = new URLSearchParams(location.search);
+      const tag = params.get('tag');
+
+      function buildUrl(cursor){
+        let u = `/api/photos?limit=${limit}`;
+        if(tag) u += `&tag=${encodeURIComponent(tag)}`;
+        if(cursor) u += `&cursor=${encodeURIComponent(cursor)}`;
+        return u;
+      }
+
+      function createItem(item){
+        const a = document.createElement('article');
+        a.className = 'gallery-item';
+        const img = document.createElement('img');
+        img.loading = 'lazy';
+        img.alt = item.alt || item.path || '';
+        img.src = item.url || (item.path ? ('/media/' + item.path) : '/assets/hero.jpg');
+        a.appendChild(img);
+        return a;
+      }
+
+      async function load(){
+        if(!hasMore) return;
+        loadMoreBtn.disabled = true;
+        loadingEl.style.display = 'block';
+        try{
+          const res = await fetch(buildUrl(nextCursor));
+          if(!res.ok) throw new Error('Network response not ok');
+          const data = await res.json();
+          const items = data.items || [];
+          if(items.length === 0 && !nextCursor){
+            // no API results — fallback to hero
+            gallery.innerHTML = `<article class="gallery-item"><img src="/assets/hero.jpg" alt="Hero landscape photograph"></article>`;
+            hasMore = false; loadMoreBtn.style.display = 'none';
+            return;
+          }
+          items.forEach(it => gallery.appendChild(createItem(it)));
+          nextCursor = data.nextCursor || null;
+          hasMore = !!(data.hasMore || nextCursor);
+          if(!hasMore) loadMoreBtn.style.display = 'none';
+        }catch(e){
+          console.error('Gallery load error', e);
+          if(!gallery.children.length){
+            gallery.innerHTML = `<article class="gallery-item"><img src="/assets/hero.jpg" alt="Hero landscape photograph"></article>`;
+          }
+          loadMoreBtn.style.display = 'none';
+        }finally{
+          loadMoreBtn.disabled = false;
+          loadingEl.style.display = 'none';
+        }
+      }
+
+      loadMoreBtn.addEventListener('click', load);
+      // initial load
+      load();
+    })();
   </script>
 </body>
 </html>
