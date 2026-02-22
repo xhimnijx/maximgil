@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <title>Client Gallery — Maxim Gil</title>
+  <meta name="robots" content="noindex" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0b0d10;
+      --fg: #eaf0f6;
+      --muted: rgba(234,240,246,.72);
+      --glass: rgba(255,255,255,.08);
+      --border: rgba(255,255,255,.14);
+      --shadow: 0 20px 80px rgba(0,0,0,.55);
+      --radius: 20px;
+      --max: 1100px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      color:var(--fg);
+      background: var(--bg);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height:1.35;
+      overflow-x:hidden;
+    }
+
+    .stars{
+      position:fixed; inset:0;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(255,255,255,.10) 0 1px, transparent 2px),
+        radial-gradient(circle at 65% 20%, rgba(255,255,255,.10) 0 1px, transparent 2px),
+        radial-gradient(circle at 35% 80%, rgba(255,255,255,.08) 0 1px, transparent 2px),
+        radial-gradient(circle at 85% 70%, rgba(255,255,255,.08) 0 1px, transparent 2px),
+        radial-gradient(circle at 45% 45%, rgba(255,255,255,.06) 0 1px, transparent 2px),
+        radial-gradient(1000px 700px at 70% 15%, rgba(120,160,255,.12), transparent 60%),
+        radial-gradient(900px 650px at 15% 75%, rgba(255,160,120,.10), transparent 60%),
+        radial-gradient(700px 700px at 55% 60%, rgba(180,120,255,.08), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+      filter: blur(.2px);
+    }
+
+    header{
+      position:relative;
+      z-index:2;
+      padding: 22px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .wrap{ max-width: var(--max); margin:0 auto; }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:inherit;
+      font-weight:600;
+      letter-spacing:.2px;
+    }
+    .logo{
+      width:34px; height:34px;
+      border-radius: 12px;
+      overflow:hidden;
+      display:inline-block;
+      flex:0 0 34px;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav-links a{
+      color: var(--muted);
+      text-decoration:none;
+      font-weight:500;
+      font-size:14px;
+      padding:10px 10px;
+      border-radius: 12px;
+      transition: .2s ease;
+      cursor:pointer;
+    }
+    .nav-links a:hover{
+      color: var(--fg);
+      background: rgba(255,255,255,.06);
+    }
+
+    main{
+      position:relative;
+      z-index:2;
+      padding: 32px 20px 48px;
+    }
+
+    .page-header{
+      max-width: var(--max);
+      margin: 0 auto 32px;
+    }
+
+    .page-header h1{
+      margin:0 0 10px;
+      font-family: Fraunces, serif;
+      font-weight:700;
+      font-size: clamp(28px, 4.5vw, 42px);
+      letter-spacing:-0.02em;
+    }
+
+    .page-header p{
+      color: var(--muted);
+      font-size: clamp(14px, 2vw, 16px);
+      margin:0;
+    }
+
+    .card{
+      max-width: var(--max);
+      margin: 0 auto;
+      width:100%;
+      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:28px 26px;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+    }
+
+    .info{
+      color: var(--muted);
+      font-size:14px;
+    }
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:var(--fg);text-decoration:none;font-weight:600;cursor:pointer;transition:.18s ease;
+    }
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.11)}
+    .btn.primary{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.22)}
+
+    footer{
+      position:relative;
+      z-index:2;
+      padding: 18px 20px 28px;
+      color: rgba(234,240,246,.55);
+      font-size: 12px;
+      text-align:center;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 520px){
+      header{ padding:18px 16px; }
+      main{ padding:24px 16px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="stars" aria-hidden="true"></div>
+
+  <header>
+    <div class="wrap">
+      <nav class="nav">
+        <a class="brand" href="/">
+          <img class="logo" src="/favicon.svg" alt="Maxim Gil" aria-hidden="true">
+          <span>Maxim Gil</span>
+        </a>
+        <div class="nav-links">
+          <a href="/">Home</a>
+          <a href="/pages/gallery.html">Public Gallery</a>
+          <a href="/pages/client-gallery.html">My Photos</a>
+          <a id="logoutBtn" href="#">Logout</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <h1>Your Private Gallery</h1>
+      <p id="userDisplay">Loading…</p>
+    </section>
+
+    <section class="card">
+      <p class="info">Client gallery coming soon. Your private photos will appear here.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © <span id="year"></span> Maxim Gil. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    async function checkAuth(){
+      try{
+        const res = await fetch('/api/auth/me');
+        if(!res.ok) throw new Error('Not authenticated');
+        const data = await res.json();
+        if(data.ok && data.user){
+          document.getElementById("userDisplay").textContent = `Welcome, ${data.user.displayName || data.user.email}`;
+          return data.user;
+        }
+      }catch(e){
+        // Not authenticated, redirect to login
+        window.location.href = '/login.html';
+      }
+    }
+
+    document.getElementById("logoutBtn").addEventListener('click', async (e) => {
+      e.preventDefault();
+      try{
+        await fetch('/api/auth/logout', { method: 'POST' });
+      }catch(e){ console.error(e); }
+      window.location.href = '/';
+    });
+
+    // Check auth on page load
+    checkAuth();
+  </script>
+</body>
+</html>
