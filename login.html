@@ -138,14 +138,68 @@
 
           <div class="actions">
             <button class="btn primary" type="submit">Log in</button>
+            <div id="error" style="color:#ff6b6b; font-size:13px; display:none"></div>
           </div>
 
           
         </form>
 
-        <div class="foot">This is a static page — implement server-side auth to process logins.</div>
+        <div class="foot" id="foot">Logging in will create a secure session.</div>
       </section>
     </main>
   </div>
+
+  <script>
+    document.querySelector('form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const agree = document.getElementById('agree').checked;
+      const errorEl = document.getElementById('error');
+
+      // Validate required fields
+      if (!email || !password) {
+        errorEl.textContent = 'Email and password are required.';
+        errorEl.style.display = 'block';
+        return;
+      }
+
+      // Validate terms & privacy acceptance
+      if (!agree) {
+        errorEl.textContent = 'You must accept the Terms & Conditions and Privacy Policy to continue.';
+        errorEl.style.display = 'block';
+        return;
+      }
+
+      // Clear error
+      errorEl.style.display = 'none';
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+          credentials: 'include',
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          errorEl.textContent = data.error || 'Login failed. Please try again.';
+          errorEl.style.display = 'block';
+          return;
+        }
+
+        // Successful login — redirect to admin if isAdmin, otherwise client gallery
+        const redirectUrl = data.user?.isAdmin ? '/pages/admin.html' : '/pages/client-gallery.html';
+        window.location.href = redirectUrl;
+      } catch (err) {
+        console.error(err);
+        errorEl.textContent = 'An error occurred. Please try again.';
+        errorEl.style.display = 'block';
+      }
+    });
+  </script>
 </body>
 </html>
